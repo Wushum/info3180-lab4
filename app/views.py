@@ -29,7 +29,9 @@ def about():
 def add_file():
     if not session.get('logged_in'):
         abort(401)
-
+        
+        
+   # UPLOAD_FOLDER = './app/static/uploads'
     file_folder = app.config["UPLOAD_FOLDER"]
 
 
@@ -55,6 +57,14 @@ def login():
             flash('You were logged in')
             return redirect(url_for('add_file'))
     return render_template('login.html', error=error)
+    
+    
+rootdir = os.getcwd()
+
+print rootdir
+for subdir, dirs, files in os.walk(rootdir + './app/static/uploads'):
+    for file in files:
+        print os.path.join(subdir, file) 
 
 @app.route('/logout')
 def logout():
