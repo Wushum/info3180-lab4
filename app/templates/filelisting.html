@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+
+<ol>
+    </br>
+    <h1>List of files in the upload folder</h1>
+<ol>
+            {%for file in filelist%}
+            <li>  {{file}} </li>
+
+            {%endfor%}
+
+        </ol>
+        </ol>
+{% endblock %}

@@ -10,6 +10,7 @@ from flask import render_template, request, redirect, url_for, flash, session, a
 from werkzeug.utils import secure_filename
 
 
+
 ###
 # Routing for your application.
 ###
@@ -23,7 +24,7 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="Winston Lindsay")
 
 @app.route('/add-file', methods=['POST', 'GET'])
 def add_file():
@@ -57,15 +58,25 @@ def login():
             flash('You were logged in')
             return redirect(url_for('add_file'))
     return render_template('login.html', error=error)
+ 
+ 
+@app.route('/filelisting')
+def filelisting():
+    if not session.get('logged_in'):
+        abort(401)
+        
+        
+    import os
+    rootdir = os.getcwd()
+    filelist = []
     
+    for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads'):
+        for file in files:
+            f = os.path.join(subdir, file)
+            filelist += [f]
+    return render_template('filelisting.html', filelist=filelist)
     
-rootdir = os.getcwd()
-
-print rootdir
-for subdir, dirs, files in os.walk(rootdir + './app/static/uploads'):
-    for file in files:
-        print os.path.join(subdir, file) 
-
+ 
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
