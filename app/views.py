@@ -74,7 +74,16 @@ def filelisting():
         for file in files:
             f = os.path.join(subdir, file)
             filelist += [f]
-    return render_template('filelisting.html', filelist=filelist)
+            
+            #names = os.listdir(os.path.join(app.static_folder, 'imgs'))
+            #img_url =  url_for('static/uploads', filesname = os.path.join('imgs' (names))
+        return render_template('filelisting.html', filelist=filelist)
+    
+    
+    #names = os.listdir(os.path.join(app.static_folder, 'imgs'))
+     #img_url =  url_for('static/uploads', filesname = os.path.join('imgs' (names))
+     #return render_template('' , img_url=img_url)
+    
     
  
 @app.route('/logout')
